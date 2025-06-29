@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register | IrisLock</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
+  <style>
+    .auth-form {
+      max-width: 400px;
+      margin: 5rem auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
+    }
+    .auth-form h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .auth-form input {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+    }
+    .auth-form button {
+      width: 100%;
+      padding: 0.75rem;
+      border: none;
+      background: var(--iris-primary);
+      color: white;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .auth-form button:hover {
+      background: var(--iris-secondary);
+    }
+    .auth-form .link {
+      display: block;
+      text-align: center;
+      margin-top: 1rem;
+      color: var(--iris-primary);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <form class="auth-form" action="../backend/register.php" method="POST">
+    <h2>Create Account</h2>
+    <input type="text" name="name" placeholder="Full Name" required />
+    <input type="email" name="email" placeholder="Email Address" required />
+    <input type="password" name="password" placeholder="Password" required />
+    <button type="submit">Register</button>
+    <a href="login.html" class="link">Already have an account? Login</a>
+  </form>
+
+</body>
+</html>
