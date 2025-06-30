@@ -2,220 +2,123 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>IrisLock Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <meta name="description" content="User Dashboard - IrisLock">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  
   <style>
-    .dashboard-container {
-      max-width: 1200px;
-      margin: 4rem auto;
+    :root {
+      --iris-primary: #2563eb;
+      --iris-dark: #1e293b;
+      --iris-light: #f8fafc;
+      --iris-muted: #64748b;
+      --iris-border: #e2e8f0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, var(--iris-light), #e0ecfa);
+      color: var(--iris-dark);
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: var(--iris-primary);
+      color: white;
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
       padding: 2rem;
       background: white;
       border-radius: 20px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
-      animation: fadeIn 1s ease-out;
-    }
-
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(40px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    .dashboard-header {
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
       text-align: center;
+    }
+
+    .welcome-text {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .description {
+      font-size: 1rem;
+      color: var(--iris-muted);
       margin-bottom: 2rem;
     }
 
-    .dashboard-header h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 2.5rem;
-      color: var(--iris-primary);
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 0.4rem 1rem;
-      background: #10b981;
-      color: white;
-      font-size: 0.9rem;
-      border-radius: 30px;
-      margin-top: 0.5rem;
-    }
-
-    .iris-scan-box {
+    .actions {
       display: flex;
-      align-items: center;
-      gap: 3rem;
       flex-wrap: wrap;
-      margin-top: 3rem;
-    }
-
-    .scanner-preview {
-      flex: 1;
-      display: flex;
-      align-items: center;
       justify-content: center;
+      gap: 1rem;
     }
 
-    .scanner-circle {
-      width: 280px;
-      height: 280px;
-      border: 6px solid var(--iris-primary);
-      border-radius: 50%;
-      position: relative;
-      box-shadow: 0 0 25px var(--iris-glow);
-      animation: rotateScanner 6s linear infinite;
-    }
-
-    .scanner-circle::before {
-      content: '';
-      position: absolute;
-      width: 60px;
-      height: 60px;
-      background: var(--iris-accent);
-      border-radius: 50%;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
-    }
-
-    @keyframes rotateScanner {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    .upload-section {
-      flex: 1;
-      background: #f8fafc;
-      padding: 2rem;
-      border-radius: 20px;
-      text-align: center;
-      box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
-    }
-
-    .upload-section h3 {
-      font-family: 'Orbitron', sans-serif;
-      margin-bottom: 1rem;
-      font-size: 1.3rem;
-    }
-
-    .upload-section input {
-      display: none;
-    }
-
-    .upload-btn {
-      background: var(--iris-primary);
-      color: white;
+    .button {
       padding: 0.9rem 2rem;
-      border-radius: 50px;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-block;
-      transition: background 0.3s;
-      margin-top: 1rem;
-    }
-
-    .upload-btn:hover {
-      background: var(--iris-secondary);
-    }
-
-    .upload-result {
-      margin-top: 1.2rem;
-      color: var(--iris-primary);
-      font-weight: 500;
-    }
-
-    .scan-history {
-      margin-top: 4rem;
-    }
-
-    .scan-history h3 {
-      font-family: 'Orbitron', sans-serif;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-
-    .history-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .history-card {
-      background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
-      border-radius: 15px;
-      padding: 1rem;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-      text-align: center;
-    }
-
-    .logout-area {
-      text-align: center;
-      margin-top: 3rem;
-    }
-
-    .logout-area a {
-      background: #ef4444;
-      color: white;
-      padding: 0.8rem 2rem;
+      border: none;
       border-radius: 40px;
       font-weight: 600;
-      text-decoration: none;
-      transition: background 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      background: var(--iris-primary);
+      color: white;
+      box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
     }
 
-    .logout-area a:hover {
-      background: #b91c1c;
+    .button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.5);
+    }
+
+    footer {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--iris-muted);
     }
   </style>
 </head>
 <body>
 
-  <div class="dashboard-container">
-    <div class="dashboard-header">
-      <h1>IrisLock Dashboard</h1>
-      <div class="badge">🔒 Secure Session Active</div>
-    </div>
+  <header>IrisLock Dashboard</header>
 
-    <div class="iris-scan-box">
-      <!-- Scanner -->
-      <div class="scanner-preview">
-        <div class="scanner-circle"></div>
-      </div>
+  <div class="container">
+    <p class="welcome-text">Welcome back, User!</p>
+    <p class="description">
+      This is your personal dashboard. Manage your settings, view updates, or explore new security features.
+    </p>
 
-      <!-- Upload -->
-      <div class="upload-section">
-        <h3>Upload Iris Image</h3>
-        <p>This simulates an iris scan</p>
-        <label class="upload-btn" for="irisUpload">Choose File</label>
-        <input type="file" id="irisUpload" accept="image/*" onchange="showScanResult()" />
-        <div id="uploadResult" class="upload-result"></div>
-      </div>
-    </div>
-
-    <!-- Scan History (Mock) -->
-    <div class="scan-history">
-      <h3>Recent Scan Records</h3>
-      <div class="history-grid">
-        <div class="history-card">🕒 2024-06-01<br>Scan Success</div>
-        <div class="history-card">🕒 2024-06-03<br>Scan Failed</div>
-        <div class="history-card">🕒 2024-06-15<br>Scan Success</div>
-        <div class="history-card">🕒 2024-06-27<br>Scan Success</div>
-      </div>
-    </div>
-
-    <div class="logout-area">
-      <a href="../backend/logout.php">Logout</a>
+    <div class="actions">
+      <button class="button">Profile</button>
+      <button class="button">Settings</button>
+      <button class="button">Logout</button>
     </div>
   </div>
 
-  <script>
-    function showScanResult() {
-      document.getElementById("uploadResult").textContent = "✅ Iris image uploaded successfully.";
-    }
-  </script>
+  <footer>
+    <!-- Optional footer removed by request -->
+  </footer>
 
 </body>
 </html>
